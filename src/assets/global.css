@@ -26,3 +26,12 @@ body {
 .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+
+.collapse-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+button:not(.collapsed) .collapse-arrow {
+  transform: rotate(90deg);
+}
