@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageLayout } from '../../components/layout/layout.export'
 import { CustomButton } from '../../components/ui/ui.export'
 import { Link } from 'react-router-dom'

@@ -1,4 +1,3 @@
-import React from 'react'
 import type { BerryCardProps } from '../../types/berry.types'
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)

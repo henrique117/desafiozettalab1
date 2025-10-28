@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageLayout } from '../../components/layout/layout.export'
 import BerryCard from './BerryCard'
 

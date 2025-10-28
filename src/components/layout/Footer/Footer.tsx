@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Footer: React.FC = () => {
     return (
         <footer className="py-3 text-light" style={{ backgroundColor: "#202124" }}>

@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageLayout } from '../../components/layout/layout.export'
 import { Link } from 'react-router-dom'
 import PokemonCard from './PokemonCard'

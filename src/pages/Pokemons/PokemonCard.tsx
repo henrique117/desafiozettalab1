@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './PokemonCard.module.css'
 import type { PokemonCardProps } from '../../types/pokemon.types'

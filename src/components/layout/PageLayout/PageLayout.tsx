@@ -1,4 +1,3 @@
-import React from 'react'
 import { Footer, NavBar } from '../layout.export'
 
 interface PageLayoutProps {
