@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import style from './PokemonCard.module.css'
 
 interface PokemonCardProps {
     id: number
@@ -12,7 +13,7 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, imageUrl }) => {
     return (
         <Link to={`/pokemon/${id}`} style={{ textDecoration: 'none' }}>
-            <div className="card text-bg-dark h-100">
+            <div className={`card text-bg-dark h-100 ${style.card}`}>
                 {imageUrl && (
                     <img 
                         src={imageUrl}
