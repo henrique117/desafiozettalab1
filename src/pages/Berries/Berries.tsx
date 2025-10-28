@@ -11,6 +11,8 @@ const berriesData = [
     { id: 6, name: 'leppa', firmness: 'very-hard', size: 28, growth_time: 4, max_harvest: 5 },
 ]
 
+berriesData.sort((a, b) => a.name.localeCompare(b.name))
+
 const Berries: React.FC = () => {
     return (
         <PageLayout>
