@@ -35,3 +35,8 @@ body {
 button:not(.collapsed) .collapse-arrow {
   transform: rotate(90deg);
 }
+
+.card:hover {
+  background-color: var(--bs-tertiary-bg) !important;
+  transition: 0.5s;
+}

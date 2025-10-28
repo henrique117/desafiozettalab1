@@ -1,4 +1,4 @@
 .navLink:hover {
-    background-color: var(--bs-light-text-emphasis);
+    background-color: var(--bs-tertiary-bg);
     transition: 0.5s;
 }
