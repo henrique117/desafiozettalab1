@@ -14,13 +14,13 @@ export interface PokemonDetailsProps {
     stats: PokemonStatsProps[]
 }
 
-interface PokemonTypeProps {
+export interface PokemonTypeProps {
     name: string
     color: string
     textColor: string
 }
 
-interface PokemonStatsProps {
+export interface PokemonStatsProps {
     name: string
     baseValue: number
 }
