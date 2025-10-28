@@ -14,12 +14,12 @@ const Pokemon: React.FC = () => {
             { name: "electric", color: "#F8D030", textColor: "#000" }
         ],
         stats: [
-            { name: "HP", value: 35, max: 255 },
-            { name: "Attack", value: 55, max: 255 },
-            { name: "Defense", value: 40, max: 255 },
-            { name: "Sp. Atk", value: 50, max: 255 },
-            { name: "Sp. Def", value: 50, max: 255 },
-            { name: "Speed", value: 90, max: 255 },
+            { name: "HP", value: 35 },
+            { name: "Attack", value: 55 },
+            { name: "Defense", value: 40 },
+            { name: "Sp. Atk", value: 50 },
+            { name: "Sp. Def", value: 50 },
+            { name: "Speed", value: 90 },
         ]
     }
 
@@ -95,10 +95,10 @@ const Pokemon: React.FC = () => {
                                                 <div className="col-3"><strong>{stat.name}</strong></div>
                                                 <div className="col-2 text-end"><strong>{stat.value}</strong></div>
                                                 <div className="col-7 d-flex align-items-center">
-                                                    <div className="progress w-100" role="progressbar" aria-valuenow={stat.value} aria-valuemin={0} aria-valuemax={stat.max}>
+                                                    <div className="progress w-100" role="progressbar" aria-valuenow={stat.value} aria-valuemin={0} aria-valuemax={255}>
                                                         <div 
                                                             className="progress-bar" 
-                                                            style={{ width: `${getStatPercent(stat.value, stat.max)}%` }}
+                                                            style={{ width: `${getStatPercent(stat.value, 255)}%` }}
                                                         ></div>
                                                     </div>
                                                 </div>

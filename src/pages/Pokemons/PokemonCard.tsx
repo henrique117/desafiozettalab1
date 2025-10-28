@@ -1,12 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import style from './PokemonCard.module.css'
-
-interface PokemonCardProps {
-    id: number
-    name: string
-    imageUrl: string
-}
+import type { PokemonCardProps } from '../../types/pokemon.types'
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
