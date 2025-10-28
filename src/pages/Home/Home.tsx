@@ -18,7 +18,7 @@ const Home: React.FC = () => {
                                 <CustomButton text='Pokemons' />
                             </Link>
                             <Link to='/berries' style={{ textDecoration: 'none' }}>
-                                <CustomButton text='Berries' color='#A7D9B5' />
+                                <CustomButton text='Berries' color='#27ca55ff' />
                             </Link>
                         </div>
                     </div>

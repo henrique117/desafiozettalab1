@@ -7,13 +7,13 @@ interface ButtonProps {
     color?: string
 }
 
-const Footer: React.FC<ButtonProps> = ({ text, onClick = () => {}, disabled = false, color = '#8ECDDD'}) => {
+const Footer: React.FC<ButtonProps> = ({ text, onClick = () => {}, disabled = false, color = '#2c9de9ff'}) => {
     return (
         <button
             type='button'
             onClick={onClick}
             disabled={disabled}
-            style={{ backgroundColor: color }}
+            style={{ backgroundColor: color, color: 'white' }}
             className='btn w-100'
         >
             <strong>{text}</strong>
