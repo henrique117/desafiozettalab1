@@ -1,28 +1,70 @@
+import { useEffect, useState } from 'react'
 import { PageLayout } from '../../components/layout/layout.export'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import type { PokemonDetailsProps } from '../../types/pokemon.types'
+import { getPokemonDetails } from '../../services/pokemonServices'
+import { CustomLoading } from '../../components/ui/ui.export'
 
 const Pokemon: React.FC = () => {
 
-    const pokemon = {
-        id: 25,
-        name: "Pikachu",
-        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        height: 4,
-        weight: 60,
-        types: [
-            { name: "electric", color: "#F8D030", textColor: "#000" }
-        ],
-        stats: [
-            { name: "HP", value: 35 },
-            { name: "Attack", value: 55 },
-            { name: "Defense", value: 40 },
-            { name: "Sp. Atk", value: 50 },
-            { name: "Sp. Def", value: 50 },
-            { name: "Speed", value: 90 },
-        ]
+    const [pokemon, setPokemon] = useState<PokemonDetailsProps>()
+    const [loading, setLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string | null>(null)
+
+    const { id } = useParams<{ id: string }>()
+
+    useEffect(() => {
+        const loadPokemon = async () => {
+            if (!id) {
+                setError("ID do Pokémon não encontrado.");
+                setLoading(false);
+                return;
+            }
+
+            try {
+                setLoading(true)
+                setError(null)
+        
+                const data = await getPokemonDetails(id)
+                
+                setPokemon(data)
+
+            } catch (err) {
+                setError('Houve uma falha ao buscar o Pokemon.')
+                console.error(err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        loadPokemon()
+
+    }, [id])
+
+    const getStatPercent = (value: number, max: number) => (value / max) * 100
+    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+
+    if (loading) {
+        return (
+            <PageLayout>
+                <div className="container mt-4">
+                    <CustomLoading text='Carregando Pokemon' />
+                </div>
+            </PageLayout>
+        )
     }
 
-    const getStatPercent = (value: number, max: number) => (value / max) * 100;
+    if (error || !pokemon) {
+        return (
+            <PageLayout>
+                <div className="container mt-4">
+                    <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>
+                </div>
+            </PageLayout>
+        )
+    }
 
     return (
         <PageLayout>
@@ -91,13 +133,13 @@ const Pokemon: React.FC = () => {
                                     {pokemon.stats.map(stat => (
                                         <li key={stat.name} className="list-group-item bg-transparent text-light px-0">
                                             <div className="row">
-                                                <div className="col-3"><strong>{stat.name}</strong></div>
-                                                <div className="col-2 text-end"><strong>{stat.value}</strong></div>
+                                                <div className="col-3"><strong>{capitalize(stat.name)}</strong></div>
+                                                <div className="col-2 text-end"><strong>{stat.baseValue}</strong></div>
                                                 <div className="col-7 d-flex align-items-center">
-                                                    <div className="progress w-100" role="progressbar" aria-valuenow={stat.value} aria-valuemin={0} aria-valuemax={255}>
+                                                    <div className="progress w-100" role="progressbar" aria-valuenow={stat.baseValue} aria-valuemin={0} aria-valuemax={255}>
                                                         <div 
                                                             className="progress-bar" 
-                                                            style={{ width: `${getStatPercent(stat.value, 255)}%` }}
+                                                            style={{ width: `${getStatPercent(stat.baseValue, 255)}%` }}
                                                         ></div>
                                                     </div>
                                                 </div>

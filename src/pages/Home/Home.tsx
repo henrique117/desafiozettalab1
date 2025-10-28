@@ -13,7 +13,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="col-md-6">
                         <div className="d-grid gap-2 col-6 mx-auto">
-                            <Link to='/pokemons' style={{ textDecoration: 'none' }}>
+                            <Link to='/pokemons?gen=1' style={{ textDecoration: 'none' }}>
                                 <CustomButton text='Pokemons' />
                             </Link>
                             <Link to='/berries' style={{ textDecoration: 'none' }}>

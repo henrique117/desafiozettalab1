@@ -71,7 +71,10 @@ export const getPokemonDetails = async (name: string): Promise<PokemonDetailsPro
             }
         }
 
-        const stats: PokemonStatsProps[] = data.stats.map((stat: { base_stat: number, effort: number, stat: { name: string, url: string } }) => { stat.base_stat, stat.stat.name })
+        const stats: PokemonStatsProps[] = data.stats.map((stat: { base_stat: number, effort: number, stat: { name: string, url: string } }) => ({
+            baseValue: stat.base_stat,
+            name: stat.stat.name
+        }))
 
         const builtReturn: PokemonDetailsProps = {
             id: data.id,
@@ -96,13 +99,18 @@ export const getAllPokemonsByGen = async (id: number): Promise<PokemonCardProps[
         const results = response.data.pokemon_species
 
         const pokemonPromises: Promise<PokemonCardProps>[] = results.map(async (pokemon: { name: string, url: string }) => {
-            const response = await apiClient.get(`/pokemon/${pokemon.name}`)
-            const data = response.data
+            try {
+                const response = await apiClient.get(`/pokemon/${pokemon.name}`)
+                const data = response.data
 
-            return {
-                id: data.id,
-                name: data.name,
-                imageUrl: data.sprites.other['official-artwork'].front_default
+                return {
+                    id: data.id,
+                    name: data.name,
+                    imageUrl: data.sprites.other['official-artwork'].front_default
+                }
+            } catch (error) {
+                console.error('Erro ao buscar Pokemon: ', pokemon.name, error)
+                return null
             }
         })
 

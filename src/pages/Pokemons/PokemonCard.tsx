@@ -6,7 +6,7 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, imageUrl }) => {
     return (
-        <Link to={`/pokemon/${id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/pokemons/${name}`} style={{ textDecoration: 'none' }}>
             <div className={`card text-bg-dark h-100 ${style.card}`}>
                 {imageUrl && (
                     <img 

@@ -1,24 +1,67 @@
+import { useEffect, useState } from 'react'
 import { PageLayout } from '../../components/layout/layout.export'
+import type { BerryCardProps } from '../../types/berry.types'
 import BerryCard from './BerryCard'
-
-const berriesData = [
-    { id: 1, name: 'cheri', firmness: 'soft', size: 20, growth_time: 3, max_harvest: 5 },
-    { id: 2, name: 'chesto', firmness: 'super-hard', size: 80, growth_time: 3, max_harvest: 5 },
-    { id: 3, name: 'pecha', firmness: 'very-soft', size: 40, growth_time: 3, max_harvest: 5 },
-    { id: 4, name: 'rawst', firmness: 'hard', size: 32, growth_time: 3, max_harvest: 5 },
-    { id: 5, name: 'aspear', firmness: 'super-hard', size: 50, growth_time: 3, max_harvest: 5 },
-    { id: 6, name: 'leppa', firmness: 'very-hard', size: 28, growth_time: 4, max_harvest: 5 },
-]
-
-berriesData.sort((a, b) => a.name.localeCompare(b.name))
+import { getAllBerries } from '../../services/berriesServices'
+import { CustomLoading } from '../../components/ui/ui.export'
 
 const Berries: React.FC = () => {
+    const [berries, setBerries] = useState<BerryCardProps[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        const loadBerries = async () => {
+            try {
+                setLoading(true)
+                setError(null)
+        
+                const data = await getAllBerries()
+
+                data.sort((a, b) => a.name.localeCompare(b.name))
+                
+                setBerries(data)
+
+            } catch (err) {
+                setError('Houve uma falha ao buscar as berries.')
+                console.error(err)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        loadBerries()
+
+    }, [])
+
+    if (loading) {
+        return (
+            <PageLayout>
+                <div className="container mt-4">
+                    <CustomLoading text='Carregando Berries' />
+                </div>
+            </PageLayout>
+        )
+    }
+
+    if (error) {
+        return (
+            <PageLayout>
+                <div className="container mt-4">
+                    <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>
+                </div>
+            </PageLayout>
+        )
+    }
+    
     return (
         <PageLayout>
             <div className="container mt-4">
                 <h1 className="fs-1 text-light mb-4 text-center">Berries</h1>
                 <div className="row g-3">
-                    {berriesData.map((berry) => (
+                    {berries.map((berry) => (
                         <BerryCard
                             id={berry.id}
                             name={berry.name}
