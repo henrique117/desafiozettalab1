@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-50 d-flex justify-content-evenly">
                         <Link to="/" style={{ textDecoration: 'none' }}><NavLink text='Home'></NavLink></Link>
-                        <Link to="/pokemons" style={{ textDecoration: 'none' }}><NavLink text='Pokemons'></NavLink></Link>
+                        <Link to="/pokemons?gen=1" style={{ textDecoration: 'none' }}><NavLink text='Pokemons'></NavLink></Link>
                         <Link to="/berries" style={{ textDecoration: 'none' }}><NavLink text='Berries'></NavLink></Link>
                     </ul>
                 </div>
